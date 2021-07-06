@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="headerfiles">
+		<link th:href="@{/css/head.css}" rel="stylesheet">
+	</head>
+	<body>
+		<header id = "intest" th:fragment="intestazione">
+			<div id="logo">
+				<img alt="logo_JKB"/>
+			</div>
+			<div id="menu">
+				<ul id="voci_menu">
+					<li>HOME</li>
+					<li>TORNEI</li>
+					<li>HALL OF FAME</li>
+					<li>SALE PARTNER</li>
+				</ul>
+			</div>
+			<div id=log_reg>
+				<ul>
+					<li>Login</li>
+					<li>Registrati</li>
+					<li>Log-out</li>
+				</ul>
+			</div>
+		</header>
+	</body>
+</html>

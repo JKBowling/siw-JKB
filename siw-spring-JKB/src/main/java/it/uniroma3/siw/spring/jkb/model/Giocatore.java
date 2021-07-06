@@ -31,7 +31,7 @@ public class Giocatore {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dataNascita;
 	
-	@Column(nullable=true)
+	@Column(nullable=true,unique=true)
 	private String soprannome;
 	
 	@Column(nullable=false,unique=true)
