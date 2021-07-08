@@ -1,5 +1,4 @@
-#intest{
-	width:20%;
-	height:100%;
-	border:10px solid red;
+.logo{
+	border-bottom:2px solid rgb(255, 0, 0);
+	background-color:black;
 }

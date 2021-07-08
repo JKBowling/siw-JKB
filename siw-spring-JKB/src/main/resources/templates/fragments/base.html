@@ -1,28 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:fragment="headerfiles">
-		<link th:href="@{/css/head.css}" rel="stylesheet">
+	<head th:fragment="intestazione(title)">
+		<meta charset="UTF-8"/>
+		<link th:href="@{/css/scritta.css}" rel="stylesheet">
+		<title th:text="${title}"></title>
 	</head>
 	<body>
-		<header id = "intest" th:fragment="intestazione">
-			<div id="logo">
-				<img alt="logo_JKB"/>
-			</div>
-			<div id="menu">
-				<ul id="voci_menu">
-					<li>HOME</li>
-					<li>TORNEI</li>
-					<li>HALL OF FAME</li>
-					<li>SALE PARTNER</li>
-				</ul>
-			</div>
-			<div id=log_reg>
-				<ul>
-					<li>Login</li>
-					<li>Registrati</li>
-					<li>Log-out</li>
-				</ul>
+		<header th:fragment="intest">
+			<div>
+				<span class="logo">logo JKB</span>
 			</div>
 		</header>
 	</body>
 </html>
+		

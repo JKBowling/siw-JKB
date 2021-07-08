@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles">
-	
+	<head th:replace="fragments/base.html :: intestazione(title='start')">
+	<link th:href="@{/static/css/scritta.css}" rel="stylesheet">
 	</head>
 	<body>
-		<header th:replace="fragments/base.html :: intestazione"></header>
+		<header th:replace="fragments/base.html :: intest"></header>
+		<p class="scritta" > questa è una scritta</p> 
 	</body>
 </html>
