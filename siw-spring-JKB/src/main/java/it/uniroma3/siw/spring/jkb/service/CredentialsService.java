@@ -4,17 +4,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.siw.spring.jkb.repository.CredentialsRepository;
 import it.uniroma3.siw.spring.jkb.model.Credentials;
+import it.uniroma3.siw.spring.jkb.repository.CredentialsRepository;
 
+@Service
 public class CredentialsService {
-	
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
 	
 	@Autowired
 	private CredentialsRepository credentialsRepository;
@@ -36,12 +36,13 @@ public class CredentialsService {
 	}
 	
 	@Transactional
-	public Credentials saveCredentials(Credentials credential) {
+	public Credentials saveCredentials(Credentials credentials) {
 		
-		credential.setRole(Credentials.DEFAULT_ROLE);
+		credentials.setRole(Credentials.DEFAULT_ROLE);
 		
-		credential.setPassword(this.passwordEncoder.encode(credential.getPassword()));
-		return this.credentialsRepository.save(credential);
+		credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
+		return this.credentialsRepository.save(credentials);
 		
 	}
+
 }

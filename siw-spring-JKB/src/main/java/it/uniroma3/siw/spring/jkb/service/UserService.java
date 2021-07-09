@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.siw.spring.jkb.repository.UserRepository;
 import it.uniroma3.siw.spring.jkb.model.User;
+import it.uniroma3.siw.spring.jkb.repository.UserRepository;
 
 @Service
 public class UserService {

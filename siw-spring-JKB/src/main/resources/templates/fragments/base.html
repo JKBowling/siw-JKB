@@ -43,7 +43,7 @@
 	</head>
 	<body>
 		<header th:fragment="intestazione">
-			<script th:fragment="script_bar">
+			<script>
 			  		$(document).ready(function(){
 			   		$(".navbar-toggler").click(function(){
 			     	$("#menu").slideToggle();
@@ -51,7 +51,7 @@
 			  		});
 		  	</script>
 	<!-- eventuale chiusura </head>, apertura <body> -->
-				<nav th:fragment="nav_bar" class="navbar navbar-dark bg-dark fixed-top">
+				<nav class="navbar navbar-dark bg-dark fixed-top">
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
@@ -61,7 +61,7 @@
 					<form th:action="@{/logout}" sec:authorize = "isAuthenticated()" method="GET"><button type="submit" class="btn btn-light">LOGOUT</button></form>
 					</div>
 				</nav>
-				<div th:fragment="menu"  id="menu" style="display:none;">
+				<div id="menu" style="display:none;">
 		  			  <a class="btn btn-dark rounded-0" th:href="@{/}">HOME</a>
 		  			  <a class="btn btn-dark rounded-0" th:href="@{/tornei}">TORNEI</a>
 		  			  <a class="btn btn-dark rounded-0" th:href="@{/nuovoTorneo}">AGGIUNGI TORNEO</a>
