@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.jkb.model.Credentials;
-import it.uniroma3.siw.spring.jkb.model.User;
+import it.uniroma3.siw.spring.jkb.model.Giocatore;
 import it.uniroma3.siw.spring.jkb.service.CredentialsService;
+import it.uniroma3.siw.spring.jkb.service.GiocatoreService;
 import it.uniroma3.siw.spring.jkb.validator.CredentialsValidator;
-import it.uniroma3.siw.spring.jkb.validator.UserValidator;
+import it.uniroma3.siw.spring.jkb.validator.GiocatoreValidator;
 
 @Controller
 public class AuthenticationController {
@@ -23,7 +24,10 @@ public class AuthenticationController {
 	private CredentialsService credentialsService;
 	
 	@Autowired
-	private UserValidator userValidator;
+	private GiocatoreService giocatoreService;
+	
+	@Autowired
+	private GiocatoreValidator giocatoreValidator;
 	
 	@Autowired
 	private CredentialsValidator credentialsValidator;
@@ -31,7 +35,7 @@ public class AuthenticationController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String showRegisterForm(Model model) {
 		
-		model.addAttribute("user", new User());
+		model.addAttribute("giocatore", new Giocatore());
 		model.addAttribute("credentials", new Credentials());
 		return "registerUser.html";
 		
@@ -53,27 +57,29 @@ public class AuthenticationController {
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		
 		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-			return "admin/home.html";
+			return "admin/adminHome.html";
 		}
 		
-		return "index.html";
+		model.addAttribute("giocatore", this.giocatoreService.getGiocatore(credentials.getGiocatore().getId()));
+		return "giocatore/home.html";
 		
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerUser(@ModelAttribute("user") User user, BindingResult userBindingResult,
+	public String registerUser(@ModelAttribute("giocatore") Giocatore giocatore, BindingResult giocatoreBindingResult,
 								@ModelAttribute("credentials") Credentials credentials,
 								BindingResult credentialsBindingResult,
 								Model model) {
 		
-		this.userValidator.validate(user, userBindingResult);
+		this.giocatoreValidator.validate(giocatore, giocatoreBindingResult);
 		this.credentialsValidator.validate(credentials, credentialsBindingResult);
 		
-		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+		if(!giocatoreBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			
-			credentials.setUser(user);
+			giocatore.generaCodice();
+			credentials.setGiocatore(giocatore);
 			credentialsService.saveCredentials(credentials);
-			return "registrationSuccessful.html";
+			return "index.html";
 			
 		}
 		

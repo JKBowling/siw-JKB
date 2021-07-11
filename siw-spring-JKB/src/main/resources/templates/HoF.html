@@ -7,8 +7,8 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			position:unset;
-			margin-top: 5%;
+			padding-top: 5%;
+			padding-left: 15%;
 		}
 		div.card{
 			text-align: center;
@@ -29,7 +29,7 @@
 		}</style>
 	</head>
 	<body>
-		<header th:replace="fragments/base.html :: intestazione"></header>
+		<th:block th:replace="fragments/base.html :: intestazione"></th:block>
 		
 		<div class="gruppo">
 		

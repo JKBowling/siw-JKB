@@ -23,11 +23,8 @@
 		</style>
 	</head>
 	<body>
-		<header>
-			<script th:replace = "fragments/base.html :: script"></script>
-			<nav th:replace = "fragments/base.html :: nav_bar"></nav>
-			<div th:replace = "fragments/base.html :: menu"></div>
-		</header>	
+		<th:block th:replace="fragments/base.html :: intestazione"></th:block>
+		
 		<div class="torneo"  th:object"${torneo}" >
 			<div id="titolo">
 				<h3 th:text="${torneo.nome}">TORNEO BELMONTE</h3>

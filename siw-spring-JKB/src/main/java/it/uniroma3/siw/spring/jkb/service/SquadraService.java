@@ -33,5 +33,10 @@ public class SquadraService {
 	public List<Squadra> tutti(){
 		return (List<Squadra>) this.squadraRepository.findAll();
 	}
+	
+	@Transactional
+	public void inserisci(Squadra squadra) {
+		this.squadraRepository.save(squadra);
+	}
 
 }

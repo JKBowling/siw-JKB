@@ -22,7 +22,7 @@ public class Squadra {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private String nome;
 	
 	@Column(nullable=false)
@@ -31,10 +31,7 @@ public class Squadra {
 	@Column
 	private Integer torneiVinti;
 	
-	@Column(nullable=false,unique=true)
-	private String code;
-	
-	@OneToMany(mappedBy="squadra",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="squadra", cascade=CascadeType.PERSIST)
 	private List<Giocatore> giocatori;
 	
 	@ManyToOne
@@ -53,10 +50,10 @@ public class Squadra {
 		if (getClass() != obj.getClass())
 			return false;
 		Squadra other = (Squadra) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}
@@ -65,14 +62,16 @@ public class Squadra {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "Squadra [nome=" + nome + ", annoFondazione=" + annoFondazione + ", torneiVinti=" + torneiVinti +", torneo=" + torneo
-				+ ", code=" + code + "]";
+		return "Squadra [nome=" + nome + ", annoFondazione=" + annoFondazione + ", torneiVinti=" + torneiVinti
+				+ ", giocatori=" + giocatori + "]";
 	}
+
+	
 	
 }

@@ -34,7 +34,7 @@ public class Credentials {
 	private String role;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private User user;
+	private Giocatore giocatore;
 	
 	
 	public  Credentials(){

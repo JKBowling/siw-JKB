@@ -8,7 +8,7 @@
 		}</style>
 	</head>
 	<body>
-		<header th:replace="fragments/base.html :: intestazione"></header>	
+		<th:block th:replace="fragments/base.html :: intestazione"></th:block>
 		<div class="card mb-3" style="max-width: 540px;" th:each = "salaDaBowling : ${saleDaBowling}">
 		  <div class="row g-0">
 		    <div class="col-md-4">

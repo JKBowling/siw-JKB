@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.jkb.model;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,23 +28,41 @@ public class Giocatore {
 	@Column(nullable=false)
 	private String cognome;
 	
-	@Column(nullable=false)
+	@Column
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dataNascita;
 	
 	@Column(nullable=true,unique=true)
 	private String soprannome;
 	
+	@Column(nullable=false)
+	private String email;
+	
+	@Column
+	private String cellulare;
+	
 	@Column(nullable=false,unique=true)
-	private String code;
+	private String codiceSquadra;
 	
 	@ManyToOne
 	private Squadra squadra;
+	
+	private Boolean isCapitano;
+	
 	
 	public Giocatore() {
 		
 	}
 
+	public void generaCodice() {
+		
+		Random rnd = new Random();
+		int number = rnd.nextInt(999999);
+		
+		this.codiceSquadra = String.format("%06d", number);
+		
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,10 +72,10 @@ public class Giocatore {
 		if (getClass() != obj.getClass())
 			return false;
 		Giocatore other = (Giocatore) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (codiceSquadra == null) {
+			if (other.codiceSquadra != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!codiceSquadra.equals(other.codiceSquadra))
 			return false;
 		return true;
 	}
@@ -65,14 +84,15 @@ public class Giocatore {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((codiceSquadra == null) ? 0 : codiceSquadra.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
 		return "Giocatore [nome=" + nome + ", cognome=" + cognome + ", dataNascita=" + dataNascita + ", soprannome="
-				+ soprannome + ", code=" + code + ", squadra=" + squadra + "]";
+				+ soprannome + ", email=" + email + ", cellulare=" + cellulare + ", codiceSquadra=" + codiceSquadra
+				+ "]";
 	}
 	
 	

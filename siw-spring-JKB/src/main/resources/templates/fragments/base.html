@@ -10,66 +10,112 @@
 		<html lang="en">
 		<style th:fragment="style">
 		
-		nav{
-			padding-left:4%;
-			justify-content:space-between;
-			position:relative;
-		}
-		
-		.google{
-			width:50%;
-			height:70%;
-		}
-		
-		#bottoni_log{
-			display:flex;
-			justify-content:space-around;
-			width:20%;
-		}
-		
-		#menu{
-			margin:4%;
-			display:flex;
-			flex-direction:column;
-			width:14%;
-			position: fixed;
-			margin-bottom:4%;
-		}
-		
-		#menu > a{
-			width:100%;
-		}
+			html, body{
+				height: 100%;
+			}
+			
+			nav.navbar{
+				position: fixed;
+				justify-content: center;
+				color: white;
+				z-index: 1;
+			}
+			
+			#bottoni_log{
+				display:flex;
+				flex-direction: column;
+				justify-content: space-between;
+				width:100%;
+			}
+			
+			.userInfo{
+				text-align: center;
+			}
+			
+			button.btn{
+				width: 70%;
+				margin: 5%;
+			}
+			
+			div.d-flex{
+				position: fixed;
+				display: flex;
+				height: 100%;
+				z-index: 2;
+			}
+			img.logo{
+				width: 100%;
+			}
+			ul.nav{
+				flex: 1;
+				text-align: center;
+			}
+			
 		</style>
 	</head>
 	<body>
-		<header th:fragment="intestazione">
-			<script>
-			  		$(document).ready(function(){
-			   		$(".navbar-toggler").click(function(){
-			     	$("#menu").slideToggle();
-			    		}); 
-			  		});
-		  	</script>
-	<!-- eventuale chiusura </head>, apertura <body> -->
-				<nav class="navbar navbar-dark bg-dark fixed-top">
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+	
+		<th:block th:fragment="intestazione">
+		
+			<header>
+				<nav class="navbar navbar-dark bg-dark fixed-top"></nav>	
+			</header>	  	 	
+	
+			<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+
+					<img class="logo" th:src="@{/images/logo_bis.png}"/>
+					<ul class="nav nav-pills flex-column mb-auto">
+						<li>
+							<a th:href="@{/}" class="nav-link text-white" aria-current="page">
+									Home
+							</a>
+						</li>
+						<li>
+							<a th:href="@{/tornei}" class="nav-link text-white">
+									Tornei
+							</a>
+						</li>
+						<li>
+							<a th:href="@{/HoF}" class="nav-link text-white">
+									Hall Of Fame
+							</a>
+						</li>
+						<li>
+							<a href="@{/salePartner}" class="nav-link text-white">
+									Sale Partner
+							</a>
+						</li>
+						<li>
+							<a th:href="@{/informazioni}" class="nav-link text-white">
+									Informazioni
+							</a>
+						</li>
+					</ul>
+
 					<div id="bottoni_log" >
-					<form th:action="@{/login}" sec:authorize = "isAnonymous()" method="GET"><button type="submit" class="btn btn-light">LOGIN</button></form>
-					<form th:action="@{/register}" sec:authorize = "isAnonymous()" method="GET"><button type="submit" class="btn btn-light">REGISTER</button></form>
-					<form th:action="@{/logout}" sec:authorize = "isAuthenticated()" method="GET"><button type="submit" class="btn btn-light">LOGOUT</button></form>
+						<form class="userInfo" th:action="@{/login}" sec:authorize = "isAnonymous()" method="GET">
+							<button type="submit" class="btn btn-light">Login</button>
+						</form>
+						<form class="userInfo" th:action="@{/register}" sec:authorize = "isAnonymous()" method="GET">
+							<button type="submit" class="btn btn-light">Registrati</button>
+						</form>
+						<div class="userInfo" sec:authorize = "isAuthenticated() && !hasAuthority('ADMIN')">
+							Ciao, <span sec:authentication = "name">qui-username</span>
+							<form th:action="@{/giocatoreHome}" method="GET">
+								<button type="submit" class="btn btn-light">Area personale</button>
+							</form>
+						</div>
+						<form class="userInfo" th:action="@{/admin}" sec:authorize = "hasAuthority('ADMIN')" method="GET">
+							<button type="submit" class="btn btn-light">Area Amministratore</button>
+						</form>
+						<form class="userInfo" th:action="@{/logout}" sec:authorize = "isAuthenticated()" method="GET">
+							<button type="submit" class="btn btn-light">Logout</button>
+						</form>
 					</div>
-				</nav>
-				<div id="menu" style="display:none;">
-		  			  <a class="btn btn-dark rounded-0" th:href="@{/}">HOME</a>
-		  			  <a class="btn btn-dark rounded-0" th:href="@{/tornei}">TORNEI</a>
-		  			  <a class="btn btn-dark rounded-0" th:href="@{/nuovoTorneo}">AGGIUNGI TORNEO</a>
-		  			  <a class="btn btn-dark rounded-0" th:href="@{/HoF}">HALL OF FAME</a>
-		  			  <a class="btn btn-dark rounded-0" th:href="@{/salePartner}">SALE PARTNER</a>
-		  			  <a class="btn btn-dark rounded-0" th:href="@{/informazioni}">INFORMAZIONI</a>
-		  			  <a class="btn btn-dark rounded-0" sec:authorize="hasAuthority('ADMIN')" th:href="@{/informazioni}">ADMIN</a>
-				</div>	
-		</header>
+				
+			</div>
+			
+		</th:block>
+		
 	</body>
 </html>

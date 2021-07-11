@@ -34,5 +34,10 @@ public class GiocatoreService {
 	public List<Giocatore> tutti(){
 		return (List<Giocatore>) this.giocatoreRepository.findAll();
 	}
+	
+	@Transactional
+	public List<Giocatore> reclutaGiocatore(String codiceSquadra){
+		return this.giocatoreRepository.findByCodiceSquadra(codiceSquadra);
+	}
 
 }

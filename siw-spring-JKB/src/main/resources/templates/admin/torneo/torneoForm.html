@@ -23,9 +23,7 @@
 		</style>
 	</head>
 	<body>
-		<script th:replace = "fragments/base.html :: script"></script>
-		<nav th:replace = "fragments/base.html :: nav_bar"></nav>
-		<div th:replace = "fragments/base.html :: menu"></div>
+		<header th:replace="fragments/base.html :: intestazione"></header>
 		
 		<form class="row g-3" th:action="@{/admin/nuovoTorneo}" method="POST" th:object="${torneo}">
 		  <div class="col-md-6">

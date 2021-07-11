@@ -5,13 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import it.uniroma3.siw.spring.jkb.model.Indirizzo;
-import it.uniroma3.siw.spring.jkb.model.SalaDaBowling;
 import it.uniroma3.siw.spring.jkb.service.SalaDaBowlingService;
 
 @Controller
-public class MainController {
+public class NavigationController {
 	
 	@Autowired
 	private SalaDaBowlingService salaDaBowlingService;
@@ -26,14 +23,13 @@ public class MainController {
 		return "informazioni.html";
 	}
 	
-	/*
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String admin(Model model) {
+		return "admin/adminHome.html";
+	}
+
 	@RequestMapping(value = "/salePartner", method = RequestMethod.GET)
 	public String salePartner(Model model) {
-		
-		Indirizzo ind = new Indirizzo("Lungotevere dell'Acqua Acetosa", "10", "00197", "Roma", "RM", "Italia", "01");
-		SalaDaBowling bruns = new SalaDaBowling("Brunswick Bowling", "bello", "01", "http://www.brunswick.it/", ind);
-		
-		this.salaDaBowlingService.inserisci(bruns);
 		
 		model.addAttribute("saleDaBowling", this.salaDaBowlingService.tutti());
 		return "salePartner.html";
@@ -44,7 +40,5 @@ public class MainController {
 		public String hallOfFame(Model model) {
 			return "HoF.html";
 		}
-	
-	*/
 	
 }

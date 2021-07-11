@@ -28,9 +28,6 @@ public class SalaDaBowling {
 	@Column(nullable=false)
 	private String descrizione;
 	
-	@Column(nullable=false,unique=true)
-	private String code;
-	
 	@Column
 	private String link;
 	
@@ -44,7 +41,6 @@ public class SalaDaBowling {
 		this.torneiOspitati=new ArrayList<>();
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,10 +50,15 @@ public class SalaDaBowling {
 		if (getClass() != obj.getClass())
 			return false;
 		SalaDaBowling other = (SalaDaBowling) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (indirizzo == null) {
+			if (other.indirizzo != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!indirizzo.equals(other.indirizzo))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}
@@ -66,15 +67,18 @@ public class SalaDaBowling {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((indirizzo == null) ? 0 : indirizzo.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "SalaDaBowling [nome=" + nome + ", descrizione=" + descrizione + ", code=" + code + ", indirizzo="
+		return "SalaDaBowling [nome=" + nome + ", descrizione=" + descrizione + ", link=" + link + ", indirizzo="
 				+ indirizzo + "]";
 	}
+	
+	
 
 	/*
 	public SalaDaBowling(String nome, String descrizione, String code, String link, Indirizzo indirizzo) {
